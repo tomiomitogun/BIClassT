@@ -1,0 +1,56 @@
+table FactCurrencyDailyTrade
+	lineageTag: 74e16cb5-9913-4947-a0d5-af24833e7c20
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: df124c61-f500-43e7-a11e-1aa2a268b1c0
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Currency
+		dataType: string
+		lineageTag: d7960071-0e58-4720-8418-9e0e4e136c27
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesAmount
+		dataType: double
+		lineageTag: bf70aef1-5177-45dd-8912-cdb5d2f883a2
+		summarizeBy: sum
+		sourceColumn: SalesAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TransCount
+		dataType: int64
+		formatString: 0
+		lineageTag: 4f2a46da-2f2b-46c2-b64e-e56cb7614da8
+		summarizeBy: sum
+		sourceColumn: TransCount
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactCurrencyDailyTrade = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("LAMIDE", "AdventureWorksDW2022", [Query="WITH RevenueData AS --back bone of the revenue data#(lf)  (SELECT CAST(OrderDate AS date) AS [Date],#(lf)          dc.CurrencyName,#(lf)          sum(SalesAmount) AS AMOUNT,#(lf)          count(SalesOrderNumber) AS TransCount#(lf)   FROM AdventureWorksDW2022.dbo.FactInternetSales fis#(lf)   INNER JOIN AdventureWorksDW2022..DimCurrency dc ON dc.CurrencyKey=fis.CurrencyKey#(lf)   GROUP BY dc.CurrencyName,#(lf)            CAST(OrderDate AS date)#(lf)   UNION ALL SELECT CAST(OrderDate AS date) AS [Date],#(lf)                    dc.CurrencyName,#(lf)                    sum(SalesAmount) AS AMOUNT,#(lf)                    count(SalesOrderNumber) AS TransCount#(lf)   FROM AdventureWorksDW2022.dbo.FactResellerSales fis#(lf)   INNER JOIN AdventureWorksDW2022..DimCurrency dc ON dc.CurrencyKey=fis.CurrencyKey#(lf)   GROUP BY dc.CurrencyName,#(lf)            CAST(OrderDate AS date)),#(lf)     MINMAX AS --gives the beginning of transaction and end of transaction in factinternetsales#(lf)  (SELECT MIN(OrderDate) AS Startdate,#(lf)          MAX(OrderDate) AS Enddate#(lf)   FROM AdventureWorksDW2022.dbo.FactInternetSales),#(lf)     UsedCurrency AS -- give only currency that were used in factinternetsales#(lf)  (SELECT DISTINCT dc.CurrencyName#(lf)   FROM AdventureWorksDW2022.dbo.FactInternetSales fis#(lf)   INNER JOIN AdventureWorksDW2022..DimCurrency dc ON dc.CurrencyKey=fis.CurrencyKey),#(lf)     TransactionDaysCurrency AS --this combines all dates and currency regardless of transaction so that each day has all currency defined#(lf)  (SELECT FullDateAlternateKey AS [Date],#(lf)          CurrencyName AS [Currency]#(lf)   FROM AdventureWorksDW2022.dbo.DimDate#(lf)   LEFT JOIN UsedCurrency ON 1=1#(lf)   WHERE FullDateAlternateKey BETWEEN#(lf)       (SELECT Startdate#(lf)        FROM MINMAX) AND#(lf)       (SELECT enddate#(lf)        FROM MINMAX)) ---joins the template of daily currency with the revenue back bone#(lf)SELECT td.[date],#(lf)       [Currency],#(lf)       ISNULL(sum(AMOUNT), 0) AS SalesAmount,#(lf)       ISNULL(sum(TransCount), 0) AS TransCount#(lf)FROM TransactionDaysCurrency AS td#(lf)LEFT JOIN RevenueData AS rd ON td.Currency=rd.CurrencyName#(lf)AND td.Date=rd.Date#(lf)GROUP BY td.[date],#(lf)         [Currency]"]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"date", type date}})
+				in
+				    #"Changed Type"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

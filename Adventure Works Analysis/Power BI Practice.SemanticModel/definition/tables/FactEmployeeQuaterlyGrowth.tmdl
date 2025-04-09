@@ -1,0 +1,41 @@
+table FactEmployeeQuaterlyGrowth
+	lineageTag: af15946c-b55a-4e4a-b984-f7e12d557a82
+
+	column Quarter
+		dataType: string
+		lineageTag: 2271cb41-b7e2-4a4a-840c-f398a185c6ca
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee Name'
+		dataType: string
+		lineageTag: 89d9d382-5150-420a-a315-fc5fbed22ae5
+		summarizeBy: none
+		sourceColumn: Employee Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column PerformanceGrowth
+		dataType: double
+		lineageTag: 637d7254-16cb-48ce-b36b-5287b159c9d8
+		summarizeBy: sum
+		sourceColumn: PerformanceGrowth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactEmployeeQuaterlyGrowth = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("LAMIDE", "AdventureWorksDW2022", [Query="WITH TotalQuota AS#(lf)  (SELECT CONCAT(dd.[CalendarYear], '-Q', dd.CalendarQuarter) AS [Quarter],#(lf)          CONCAT(DE.FirstName, ' ', DE.MiddleName, ' ', DE.LastName) AS [Employee Name],#(lf)          Sum(SalesAmountQuota) AS [Total Quota]#(lf)   FROM [AdventureWorksDW2022].[dbo].[FactSalesQuota] AS FSQ#(lf)   INNER JOIN [AdventureWorksDW2022]..DimEmployee AS DE ON FSQ.EmployeeKey = DE.EmployeeKey#(lf)   INNER JOIN [AdventureWorksDW2022]..DimDate AS dd ON fsq.Date=dd.FullDateAlternateKey#(lf)   GROUP BY CONCAT(DE.FirstName, ' ', DE.MiddleName, ' ', DE.LastName),#(lf)            CONCAT(dd.[CalendarYear], '-Q', dd.CalendarQuarter) --Order by [Employee Name]#(lf)),#(lf)     RewardedEmployee AS#(lf)  (SELECT DISTINCT CONCAT(DE.FirstName, ' ', DE.MiddleName, ' ', DE.LastName) AS [Employee Name]#(lf)   FROM [AdventureWorksDW2022].[dbo].[FactSalesQuota] AS FSQ#(lf)   INNER JOIN [AdventureWorksDW2022]..DimEmployee AS DE ON FSQ.EmployeeKey = DE.EmployeeKey),#(lf)     MINMAX AS#(lf)  (SELECT MIN([Date]) AS StartDate,#(lf)          MAX([Date]) AS EndDate#(lf)   FROM [AdventureWorksDW2022].[dbo].[FactSalesQuota]),#(lf)     QuaterlyRewardee AS#(lf)  (SELECT DISTINCT CONCAT([CalendarYear], '-Q', CalendarQuarter) AS [Quarter],#(lf)                   (dd.CalendarYear*10)+dd.CalendarQuarter AS QuarterSort,#(lf)                   [Employee Name]#(lf)   FROM [AdventureWorksDW2022]..DimDate AS DD#(lf)   LEFT JOIN RewardedEmployee AS RE ON 1=1#(lf)   WHERE FullDateAlternateKey BETWEEN#(lf)       (SELECT Startdate#(lf)        FROM MINMAX) AND#(lf)       (SELECT enddate#(lf)        FROM MINMAX)),#(lf)     Growthvalue AS#(lf)  (SELECT qr.[Quarter],#(lf)          qr.[Employee Name],#(lf)          ISNULL(tq.[Total Quota], 0) AS [Total Quota],#(lf)          LAG(ISNULL(tq.[Total Quota], 0), 1, 0) OVER (PARTITION BY qr.[Employee Name]#(lf)                                                       ORDER BY QuarterSort) AS[LAST Total QUOTA]#(lf)   FROM QuaterlyRewardee AS QR#(lf)   LEFT JOIN TotalQuota tq ON qr.[Employee Name]=tq.[Employee Name]#(lf)   AND qr.Quarter=tq.Quarter)#(lf)SELECT [Quarter],#(lf)       [Employee Name],#(lf)       isnull(([Total Quota]-[Last Total Quota])/Nullif([Last Total Quota], 0), 0) as PerformanceGrowth#(lf)FROM Growthvalue;"])
+				in
+				    Source
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

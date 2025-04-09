@@ -1,0 +1,173 @@
+table DimEmployee
+	lineageTag: accdf031-022b-4b02-bdb6-de15df4f4784
+
+	column EmployeeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 330596f1-d452-4422-93a4-66069677a7ae
+		summarizeBy: count
+		sourceColumn: EmployeeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee Name'
+		dataType: string
+		lineageTag: 2df0dde0-caea-4a43-9a00-323e06a34c51
+		summarizeBy: none
+		sourceColumn: Employee Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column NameStyle
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: dad4b360-547a-46ad-ab02-4c9c2c05c67b
+		summarizeBy: none
+		sourceColumn: NameStyle
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: 7d6bd647-b06c-4224-b5a1-2be4441aa114
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaritalStatus
+		dataType: string
+		lineageTag: fe1fb921-a660-49d0-b7ae-7c816af671cd
+		summarizeBy: none
+		sourceColumn: MaritalStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalariedFlag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c4330a9b-eeac-4bd4-abb2-e958e2d91977
+		summarizeBy: none
+		sourceColumn: SalariedFlag
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: 3cfee17c-3622-4ed1-a2d5-3158d409578b
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column PayFrequency
+		dataType: int64
+		formatString: 0
+		lineageTag: 80e3684b-98fb-461e-a454-faf30990e16f
+		summarizeBy: sum
+		sourceColumn: PayFrequency
+
+		annotation SummarizationSetBy = Automatic
+
+	column BaseRate
+		dataType: double
+		lineageTag: 584dc2ac-94d5-4abe-acd9-b37220fe8a9c
+		summarizeBy: sum
+		sourceColumn: BaseRate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VacationHours
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c859284-c7b5-4a42-8f1c-6e8a43317262
+		summarizeBy: sum
+		sourceColumn: VacationHours
+
+		annotation SummarizationSetBy = Automatic
+
+	column SickLeaveHours
+		dataType: int64
+		formatString: 0
+		lineageTag: 2b1f9720-2c08-44b4-ad42-7104f75c5e0d
+		summarizeBy: sum
+		sourceColumn: SickLeaveHours
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrentFlag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: cf706fc6-05ce-4c33-a1f6-a4e8c3b169c3
+		summarizeBy: none
+		sourceColumn: CurrentFlag
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesPersonFlag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3d7938f6-548d-4d07-b33a-1bd957791a38
+		summarizeBy: none
+		sourceColumn: SalesPersonFlag
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentName
+		dataType: string
+		lineageTag: 562030bd-6b57-48f0-848e-991d5cd8aeb7
+		summarizeBy: none
+		sourceColumn: DepartmentName
+
+		annotation SummarizationSetBy = Automatic
+
+	column StartDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 10401cc1-149a-4bf0-ac4f-19cfd44be0b0
+		summarizeBy: none
+		sourceColumn: StartDate
+
+		variation Variation
+			isDefault
+			relationship: b9d9c298-54da-45c2-9195-baa1353445d8
+			defaultHierarchy: LocalDateTable_bd54f6ad-28b7-4804-b403-f646e7f7c68e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column EndDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 74878a8a-e5a5-4363-96a1-997c59d15d31
+		summarizeBy: none
+		sourceColumn: EndDate
+
+		variation Variation
+			isDefault
+			relationship: af8b6103-c10c-4c0f-93e3-ae747b4fd2a5
+			defaultHierarchy: LocalDateTable_cbf711f2-b6fc-4575-b04a-8752ac14a586.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 824edacd-2393-40fc-a1cd-08b598e8a948
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimEmployee = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("LAMIDE", "AdventureWorksDW2022", [Query="SELECT[EmployeeKey]#(lf)      ,CONCAT (FirstName, ' ',MiddleName, ' ',LastName) as [Employee Name] ,[NameStyle]#(lf)      ,[Title]#(lf)      ,[MaritalStatus]#(lf)      ,[SalariedFlag]#(lf)      ,[Gender]#(lf)      ,[PayFrequency]#(lf)      ,[BaseRate]#(lf)      ,[VacationHours]#(lf)      ,[SickLeaveHours]#(lf)      ,[CurrentFlag]#(lf)      ,[SalesPersonFlag]#(lf)      ,[DepartmentName]#(lf)      ,[StartDate]#(lf)      ,[EndDate]#(lf)      ,[Status]#(lf)   FROM [AdventureWorksDW2022].[dbo].[DimEmployee]#(lf)   where [EndDate] is null"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

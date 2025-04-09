@@ -1,0 +1,41 @@
+table FactQuaterlyEmployeeQuota
+	lineageTag: eb3fcc0f-e026-4c3d-957e-9b17e7657451
+
+	column Quarter
+		dataType: string
+		lineageTag: f8573bbf-1063-40e9-97b6-193db8f1fbf8
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee Name'
+		dataType: string
+		lineageTag: 31f6ec9e-4900-4412-95ee-1fd6389ce32c
+		summarizeBy: none
+		sourceColumn: Employee Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Quota'
+		dataType: double
+		lineageTag: 4027da27-02fa-463b-9c91-93d74e626e4b
+		summarizeBy: sum
+		sourceColumn: Total Quota
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactQuaterlyEmployeeQuota = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("LAMIDE", "AdventureWorksDW2022", [Query="SELECT CONCAT(dd.[CalendarYear], '-Q',dd.CalendarQuarter) AS [Quarter]#(lf),CONCAT(DE.FirstName,' ',DE.MiddleName, ' ',DE.LastName) AS [Employee Name]#(lf),Sum(SalesAmountQuota) AS [Total Quota]#(lf)FROM [AdventureWorksDW2022].[dbo].[FactSalesQuota] AS FSQ#(lf)INNER JOIN [AdventureWorksDW2022]..DimEmployee AS DE ON FSQ.EmployeeKey = DE.EmployeeKey#(lf)INNER JOIN [AdventureWorksDW2022]..DimDate as dd on fsq.Date=dd.FullDateAlternateKey#(lf)group by CONCAT(DE.FirstName,' ',DE.MiddleName, ' ',DE.LastName),CONCAT(dd.[CalendarYear], '-Q',dd.CalendarQuarter)#(lf)Order by [Employee Name];"])
+				in
+				    Source
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

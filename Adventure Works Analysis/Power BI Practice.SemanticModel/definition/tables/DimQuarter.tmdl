@@ -1,0 +1,26 @@
+table DimQuarter
+	lineageTag: ba97778c-a9b2-426a-8e2b-d9748ed34c92
+
+	column Quarter
+		dataType: string
+		lineageTag: cea858fa-1d09-46cc-8b78-6997152c29ba
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimQuarter = m
+		mode: import
+		source =
+				let
+				    Source = DimDate,
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"Quarter"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Other Columns",{{"Quarter", type text}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Changed Type")
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

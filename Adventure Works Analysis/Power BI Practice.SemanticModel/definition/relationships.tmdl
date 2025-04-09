@@ -1,0 +1,54 @@
+relationship 61a99e96-df91-4d0d-86c7-7716a4e2c625
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimDate.Date
+	toColumn: LocalDateTable_ae712915-12fd-4bc6-b36d-19e98fb5e001.Date
+
+relationship b9d9c298-54da-45c2-9195-baa1353445d8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimEmployee.StartDate
+	toColumn: LocalDateTable_bd54f6ad-28b7-4804-b403-f646e7f7c68e.Date
+
+relationship af8b6103-c10c-4c0f-93e3-ae747b4fd2a5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimEmployee.EndDate
+	toColumn: LocalDateTable_cbf711f2-b6fc-4575-b04a-8752ac14a586.Date
+
+relationship AutoDetected_8b31a011-d96c-4381-8eaa-0b0a27514000
+	fromColumn: FactEmployeeQuota.'Employee Name'
+	toColumn: DimEmployee.'Employee Name'
+
+relationship AutoDetected_a1f12157-6aee-4fa7-b223-d47edafdc2ef
+	fromColumn: FactQuaterlyEmployeeQuota.'Employee Name'
+	toColumn: DimEmployee.'Employee Name'
+
+relationship AutoDetected_df7567c8-1152-43ce-8743-82ccedbc7387
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FactTop5Employees.'Employee Name'
+	toColumn: DimEmployee.'Employee Name'
+
+relationship AutoDetected_8f996969-2544-4f33-aecc-9031e241899e
+	fromColumn: FactEmployeeQuaterlyGrowth.'Employee Name'
+	toColumn: DimEmployee.'Employee Name'
+
+relationship 7c5c8113-46e0-a571-30f7-490652d2ca70
+	fromColumn: FactCurrencyDailyTrade.date
+	toColumn: DimDate.Date
+
+relationship AutoDetected_d1e5b256-c182-404a-8c2b-04b5b32c414c
+	fromColumn: DimDate.Year
+	toColumn: DimYear.Year
+
+relationship 244c7b98-9c49-b9af-e9de-0aa310165ebf
+	crossFilteringBehavior: bothDirections
+	fromColumn: DimDate.Quarter
+	toColumn: DimQuarter.Quarter
+
+relationship 22edb468-a150-f6cc-46f0-f64554527ac2
+	fromColumn: FactEmployeeQuaterlyGrowth.Quarter
+	toColumn: DimQuarter.Quarter
+
+relationship 0b060bb8-2e9c-0637-60ba-2caf180c6091
+	fromColumn: FactQuaterlyEmployeeQuota.Quarter
+	toColumn: DimQuarter.Quarter
+
