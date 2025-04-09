@@ -111,6 +111,15 @@
           "z": 0.00
         },
         {
+          "config": "{\"name\":\"4649f9f43274bddfdbbb\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1021,\"y\":397,\"width\":259,\"height\":280,\"z\":4000,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"hundredPercentStackedColumnChart\",\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 280.00,
+          "width": 259.00,
+          "x": 1021.00,
+          "y": 397.00,
+          "z": 4000.00
+        },
+        {
           "config": "{\"name\":\"cf29f044064118472773\",\"layouts\":[{\"id\":0,\"position\":{\"x\":13.228448176428524,\"y\":0,\"z\":1000,\"width\":353.3885441417334,\"height\":77.48091074765277,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"FactCurrencyDailyTrade.Currency\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"FactCurrencyDailyTrade\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Currency\"},\"Name\":\"FactCurrencyDailyTrade.Currency\",\"NativeReferenceName\":\"Currency\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{}}]}}}",
           "filters": "[]",
           "height": 77.48,
@@ -129,13 +138,13 @@
           "z": 2000.00
         },
         {
-          "config": "{\"name\":\"d70fa95ffaa9bd9923f8\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1021,\"y\":117,\"width\":259,\"height\":280,\"z\":2001,\"tabOrder\":2001}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"CountNonNull(DimEmployee.EmployeeKey)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"DimEmployee\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"EmployeeKey\"}},\"Function\":5},\"Name\":\"CountNonNull(DimEmployee.EmployeeKey)\",\"NativeReferenceName\":\"Count of EmployeeKey\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"EmployeeKey\"}},\"Function\":5}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "config": "{\"name\":\"d70fa95ffaa9bd9923f8\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1021,\"y\":117,\"width\":259,\"height\":280,\"z\":3000,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"CountNonNull(DimEmployee.EmployeeKey)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"DimEmployee\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"EmployeeKey\"}},\"Function\":5},\"Name\":\"CountNonNull(DimEmployee.EmployeeKey)\",\"NativeReferenceName\":\"Count of EmployeeKey\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"EmployeeKey\"}},\"Function\":5}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
           "filters": "[]",
           "height": 280.00,
           "width": 259.00,
           "x": 1021.00,
           "y": 117.00,
-          "z": 2001.00
+          "z": 3000.00
         }
       ],
       "width": 1280.00
