@@ -1,0 +1,36 @@
+table FactTop5Employees
+	lineageTag: dd2e36c6-bb78-456b-b50b-17c3e613604d
+
+	column 'Employee Name'
+		dataType: string
+		lineageTag: 5b53d852-2a62-4c2a-87d3-164ac97670ed
+		summarizeBy: none
+		sourceColumn: Employee Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Quota'
+		dataType: int64
+		lineageTag: c93ee503-f16a-4c74-9cbe-3e271bf95b21
+		summarizeBy: sum
+		sourceColumn: Total Quota
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactTop5Employees = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("LAMIDE", "AdventureWorksDW2022", [Query="SELECT TOP (5) CONCAT(DE.FirstName,' ',DE.MiddleName, ' ',DE.LastName) AS [Employee Name]#(lf),Sum(SalesAmountQuota) AS [Total Quota]#(lf)FROM [AdventureWorksDW2022].[dbo].[FactSalesQuota] AS FSQ#(lf)INNER JOIN [AdventureWorksDW2022]..DimEmployee AS DE ON FSQ.EmployeeKey = DE.EmployeeKey#(lf)group by CONCAT(DE.FirstName,' ',DE.MiddleName, ' ',DE.LastName)#(lf)ORDER BY 2 desc;"]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Total Quota", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

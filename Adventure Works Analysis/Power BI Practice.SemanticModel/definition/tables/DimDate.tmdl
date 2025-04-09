@@ -1,0 +1,92 @@
+table DimDate
+	lineageTag: a353b864-8222-4954-921c-864577f3152a
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 61103866-1fd0-466d-a41f-70e08345d5b3
+		summarizeBy: count
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 256edb52-9585-4f03-a922-214b0fa26b36
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 61a99e96-df91-4d0d-86c7-7716a4e2c625
+			defaultHierarchy: LocalDateTable_ae712915-12fd-4bc6-b36d-19e98fb5e001.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DayNumberOfWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: 8990742d-5115-4c60-94ab-3d70f01896cd
+		summarizeBy: sum
+		sourceColumn: DayNumberOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days of week'
+		dataType: string
+		lineageTag: 4eb25d85-f00b-4698-9b49-275142a5f2c0
+		summarizeBy: none
+		sourceColumn: Days of week
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: eb792392-69ca-45f2-b5ff-e19201363512
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month No'
+		dataType: int64
+		formatString: 0
+		lineageTag: 575e0ab8-be71-4c5d-80e3-2e8854d31d51
+		summarizeBy: sum
+		sourceColumn: Month No
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: string
+		lineageTag: 27ba87e8-6736-437d-aa51-b61a48ceb089
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 2bbadbc5-667a-4d2f-8bcc-9162937edbd3
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimDate = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("LAMIDE", "AdventureWorksDW2022", [Query="SELECT [DateKey]#(lf)      ,[FullDateAlternateKey] as [Date]#(lf)      ,[DayNumberOfWeek]#(lf)      ,[EnglishDayNameOfWeek] as[Days of week]#(lf)      ,[EnglishMonthName] as [Month]#(lf)      ,[MonthNumberOfYear] as [Month No]#(lf)      ,CONCAT([CalendarYear], '-Q', CalendarQuarter) AS [Quarter]#(lf)      ,[CalendarYear] as [Year]#(lf)  FROM [AdventureWorksDW2022].[dbo].[DimDate]#(lf)  where [CalendarYear] >= 2010"]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Date", type date}, {"Month No", Int64.Type}, {"Year", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

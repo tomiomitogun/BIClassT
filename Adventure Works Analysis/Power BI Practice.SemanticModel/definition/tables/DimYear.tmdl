@@ -1,0 +1,26 @@
+table DimYear
+	lineageTag: e5ee0dbb-0cbc-4bf0-9ad3-c5d80ba0c851
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: ee47a133-4b6b-4bc4-997e-279475c3710b
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimYear = m
+		mode: import
+		source =
+				let
+				    Source = DimDate,
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"Year"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

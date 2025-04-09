@@ -1,0 +1,32 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["FactEmployeeQuota","FactQuaterlyEmployeeQuota","FactTop5Employees","FactEmployeeQuaterlyGrowth","FactCurrencyDailyTrade","DimDate","DimEmployee","DimYear","DimQuarter"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.141.1451.0 (25.03)+5007b75f0f7edbed506e31fcb76584cd6d711788
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table FactEmployeeQuota
+ref table FactQuaterlyEmployeeQuota
+ref table FactTop5Employees
+ref table FactEmployeeQuaterlyGrowth
+ref table FactCurrencyDailyTrade
+ref table DateTableTemplate_7fcfb4cf-d8a4-402f-93cc-139737a1688d
+ref table DimDate
+ref table LocalDateTable_ae712915-12fd-4bc6-b36d-19e98fb5e001
+ref table DimEmployee
+ref table LocalDateTable_bd54f6ad-28b7-4804-b403-f646e7f7c68e
+ref table LocalDateTable_cbf711f2-b6fc-4575-b04a-8752ac14a586
+ref table DimYear
+ref table DimQuarter
+
+ref cultureInfo en-US
+

@@ -1,0 +1,135 @@
+{
+  "config": "{\"version\":\"5.62\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.61\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU10",
+            "path": "BaseThemes/CY24SU10.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Page 2",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "750d6d801767974ed97a",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"04960646bc5bb97a610d\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":105.24984187223276,\"z\":1000,\"width\":1258.1404174573056,\"height\":299.5572422517394,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"lineStackedColumnComboChart\",\"projections\":{\"Category\":[{\"queryRef\":\"DimEmployee.Employee Name\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(FactQuaterlyEmployeeQuota.Total Quota)\"}],\"Y2\":[{\"queryRef\":\"Sum(FactEmployeeQuaterlyGrowth.PerformanceGrowth)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"FactQuaterlyEmployeeQuota\",\"Type\":0},{\"Name\":\"f1\",\"Entity\":\"FactEmployeeQuaterlyGrowth\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"DimEmployee\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Total Quota\"}},\"Function\":0},\"Name\":\"Sum(FactQuaterlyEmployeeQuota.Total Quota)\",\"NativeReferenceName\":\"Sum of Total Quota\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f1\"}},\"Property\":\"PerformanceGrowth\"}},\"Function\":0},\"Name\":\"Sum(FactEmployeeQuaterlyGrowth.PerformanceGrowth)\",\"NativeReferenceName\":\"Sum of PerformanceGrowth\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Employee Name\"},\"Name\":\"DimEmployee.Employee Name\",\"NativeReferenceName\":\"Employee Name\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Total Quota\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"lineStyles\":[{\"properties\":{\"lineChartType\":{\"expr\":{\"Literal\":{\"Value\":\"'smooth'\"}}}}}],\"dataPoint\":[{\"properties\":{\"fill\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":9,\"Percent\":0}}}}}},\"selector\":{\"metadata\":\"Sum(FactEmployeeQuaterlyGrowth.PerformanceGrowth)\"}}]}}}",
+          "filters": "[]",
+          "height": 299.56,
+          "width": 1258.14,
+          "x": 0.00,
+          "y": 105.25,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"09fe00ca80cc81a64d06\",\"layouts\":[{\"id\":0,\"position\":{\"x\":382.1378874130297,\"y\":437.19165085388994,\"z\":4000,\"width\":440.4301075268817,\"height\":267.17267552182165,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"donutChart\",\"projections\":{\"Y\":[{\"queryRef\":\"Sum(FactEmployeeQuota.Total Quota)\"}],\"Series\":[{\"queryRef\":\"DimEmployee.Gender\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"FactEmployeeQuota\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"DimEmployee\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Total Quota\"}},\"Function\":0},\"Name\":\"Sum(FactEmployeeQuota.Total Quota)\",\"NativeReferenceName\":\"Sum of Total Quota\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Gender\"},\"Name\":\"DimEmployee.Gender\",\"NativeReferenceName\":\"Gender\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Total Quota\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 267.17,
+          "width": 440.43,
+          "x": 382.14,
+          "y": 437.19,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"26801a554ae998323bd3\",\"layouts\":[{\"id\":0,\"position\":{\"x\":26.456896352857047,\"y\":35.90578790744885,\"z\":3000,\"width\":221.10406237744817,\"height\":69.92179750397933,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"DimDate.Year\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"DimDate\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Year\"},\"Name\":\"DimDate.Year\",\"NativeReferenceName\":\"Year\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{}}]}}}",
+          "filters": "[]",
+          "height": 69.92,
+          "width": 221.10,
+          "x": 26.46,
+          "y": 35.91,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"3109b35adea5bebbba9e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":982.8716002530044,\"y\":0,\"z\":6000,\"width\":236.40733712839975,\"height\":105.24984187223276,\"tabOrder\":6000}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Sum(FactQuaterlyEmployeeQuota.Total Quota)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"FactQuaterlyEmployeeQuota\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Total Quota\"}},\"Function\":0},\"Name\":\"Sum(FactQuaterlyEmployeeQuota.Total Quota)\",\"NativeReferenceName\":\"Sum of Total Quota\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Total Quota\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 105.25,
+          "width": 236.41,
+          "x": 982.87,
+          "y": 0.00,
+          "z": 6000.00
+        },
+        {
+          "config": "{\"name\":\"588185b0057626cdbd44\",\"layouts\":[{\"id\":0,\"position\":{\"x\":272.1280767722439,\"y\":35.90578790744885,\"z\":2000,\"width\":221.10406237744817,\"height\":69.92179750397933,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"DimDate.Quarter\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"DimDate\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Quarter\"},\"Name\":\"DimDate.Quarter\",\"NativeReferenceName\":\"Quarter\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{}}]}}}",
+          "filters": "[]",
+          "height": 69.92,
+          "width": 221.10,
+          "x": 272.13,
+          "y": 35.91,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"b9158bba43163894dc19\",\"layouts\":[{\"id\":0,\"position\":{\"x\":840.3795066413662,\"y\":411.28399746995575,\"z\":0,\"width\":440.4301075268817,\"height\":280.12650221378874,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"funnel\",\"projections\":{\"Category\":[{\"queryRef\":\"FactTop5Employees.Employee Name\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(FactTop5Employees.Total Quota)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"FactTop5Employees\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Employee Name\"},\"Name\":\"FactTop5Employees.Employee Name\",\"NativeReferenceName\":\"Employee Name\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Total Quota\"}},\"Function\":0},\"Name\":\"Sum(FactTop5Employees.Total Quota)\",\"NativeReferenceName\":\"Sum of Total Quota\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Total Quota\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 280.13,
+          "width": 440.43,
+          "x": 840.38,
+          "y": 411.28,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"bc43dc8cce6801eac7b5\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":437.19165085388994,\"z\":5000,\"width\":382.1378874130297,\"height\":254.21884882985452,\"tabOrder\":5000}}],\"singleVisual\":{\"visualType\":\"donutChart\",\"projections\":{\"Category\":[{\"queryRef\":\"DimEmployee.MaritalStatus\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(FactEmployeeQuota.Total Quota)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"DimEmployee\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"FactEmployeeQuota\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"MaritalStatus\"},\"Name\":\"DimEmployee.MaritalStatus\",\"NativeReferenceName\":\"MaritalStatus\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Total Quota\"}},\"Function\":0},\"Name\":\"Sum(FactEmployeeQuota.Total Quota)\",\"NativeReferenceName\":\"Sum of Total Quota\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Total Quota\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 254.22,
+          "width": 382.14,
+          "x": 0.00,
+          "y": 437.19,
+          "z": 5000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "8d05625e411908c44c99",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"23b1b581238dcd050d93\",\"layouts\":[{\"id\":0,\"position\":{\"x\":13.228448176428524,\"y\":396.85344529285567,\"z\":0,\"width\":997.8029481648944,\"height\":279.68719001591734,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Category\":[{\"queryRef\":\"DimDate.Date.Variation.Date Hierarchy.Year\",\"active\":true},{\"queryRef\":\"DimDate.Date.Variation.Date Hierarchy.Quarter\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(FactCurrencyDailyTrade.TransCount)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"DimDate\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"FactCurrencyDailyTrade\",\"Type\":0}],\"Select\":[{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Name\":\"Variation\",\"Property\":\"Date\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Year\"},\"Name\":\"DimDate.Date.Variation.Date Hierarchy.Year\",\"NativeReferenceName\":\"Date Year\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Name\":\"Variation\",\"Property\":\"Date\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Quarter\"},\"Name\":\"DimDate.Date.Variation.Date Hierarchy.Quarter\",\"NativeReferenceName\":\"Date Quarter\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"TransCount\"}},\"Function\":0},\"Name\":\"Sum(FactCurrencyDailyTrade.TransCount)\",\"NativeReferenceName\":\"Sum of TransCount\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"lineStyles\":[{\"properties\":{\"lineChartType\":{\"expr\":{\"Literal\":{\"Value\":\"'smooth'\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Count of Transaction by Year and Month'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 279.69,
+          "width": 997.80,
+          "x": 13.23,
+          "y": 396.85,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"cf29f044064118472773\",\"layouts\":[{\"id\":0,\"position\":{\"x\":13.228448176428524,\"y\":0,\"z\":1000,\"width\":353.3885441417334,\"height\":77.48091074765277,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"FactCurrencyDailyTrade.Currency\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"FactCurrencyDailyTrade\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Currency\"},\"Name\":\"FactCurrencyDailyTrade.Currency\",\"NativeReferenceName\":\"Currency\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{}}]}}}",
+          "filters": "[]",
+          "height": 77.48,
+          "width": 353.39,
+          "x": 13.23,
+          "y": 0.00,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"d1ab1b1225a50bc0e546\",\"layouts\":[{\"id\":0,\"position\":{\"x\":13.228448176428524,\"y\":117.16625527693834,\"z\":2000,\"width\":997.8029481648944,\"height\":279.68719001591734,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Y\":[{\"queryRef\":\"Sum(FactCurrencyDailyTrade.SalesAmount)\"}],\"Category\":[{\"queryRef\":\"DimDate.Date.Variation.Date Hierarchy.Year\",\"active\":true},{\"queryRef\":\"DimDate.Date.Variation.Date Hierarchy.Quarter\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"FactCurrencyDailyTrade\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"DimDate\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"SalesAmount\"}},\"Function\":0},\"Name\":\"Sum(FactCurrencyDailyTrade.SalesAmount)\",\"NativeReferenceName\":\"Sum of SalesAmount\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Name\":\"Variation\",\"Property\":\"Date\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Year\"},\"Name\":\"DimDate.Date.Variation.Date Hierarchy.Year\",\"NativeReferenceName\":\"Date Year\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Name\":\"Variation\",\"Property\":\"Date\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Quarter\"},\"Name\":\"DimDate.Date.Variation.Date Hierarchy.Quarter\",\"NativeReferenceName\":\"Date Quarter\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"lineStyles\":[{\"properties\":{\"lineChartType\":{\"expr\":{\"Literal\":{\"Value\":\"'smooth'\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Sales Amount by Year and Month'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 279.69,
+          "width": 997.80,
+          "x": 13.23,
+          "y": 117.17,
+          "z": 2000.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}
